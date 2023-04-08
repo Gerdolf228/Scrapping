@@ -54,7 +54,12 @@ for category_name, category_href in all_categories.items():
 
         soup = BeautifulSoup(src, "lxml")
 
-        #Собираем заголовки таблицы
+        # Проверка страницы на наличие таблицы
+        alert_block = soup.find(class_="uk-alert-danger")
+        if alert_block is not None:
+            continue
+
+        # Собираем заголовки таблицы
         table_head = soup.find(class_="mzr-tc-group-table").find("tr").find_all("th")
         product = table_head[0].text
         calories = table_head[1].text
