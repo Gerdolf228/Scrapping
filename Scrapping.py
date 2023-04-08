@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import csv
 
 #url ="https://health-diet.ru/table_calorie/"
 #
@@ -55,7 +56,23 @@ for category_name, category_href in all_categories.items():
 
         #Собираем заголовки таблицы
         table_head = soup.find(class_="mzr-tc-group-table").find("tr").find_all("th")
-        print(table_head)
+        product = table_head[0].text
+        calories = table_head[1].text
+        proteins = table_head[2].text
+        fats = table_head[3].text
+        carbohydrates = table_head[4].text
+
+        with open(f"data/{count}_{category_name}.csv", "w", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(
+                (
+                    product,
+                    calories,
+                    proteins,
+                    fats,
+                    carbohydrates
+                )
+            )
 
         count += 1
 
