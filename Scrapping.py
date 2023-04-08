@@ -35,7 +35,7 @@ with open("all_categories_dict.json", encoding="utf-8") as file:
 
 for category_name, category_href in all_categories.items():
 
-    rep = [",", " ", "-"]
+    rep = [",", " ", "-", "'"]
     for item in rep:
         if item in category_name:
             category_name = category_name.replace(item, "_")
